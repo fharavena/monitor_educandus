@@ -1,0 +1,40 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb" style="background-color: white;">
+    <li class="breadcrumb-item"><a routerLink="">Inicio</a></li>
+    <li class="breadcrumb-item">
+      <a routerLink="/neveraccess">Usuarios sin ingreso</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+      Detalle
+    </li>
+  </ol>
+</nav>
+<div>
+  <p>Nombre: {{ nombre }}</p>
+  <p>Rut: {{ rut }}</p>
+  <p>Ultimo Acceso: {{ ultimo_acceso }}</p>
+  <p>Facultad: {{ fac_nombre }}</p>
+  <p>Escuela: {{ esc_nombre }}</p>
+  <p>Carrera: {{ nom_pra }}</p>
+</div>
+
+<div>
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <th>Código asignatura</th>
+      <th>régimen</th>
+      <th>Inicio</th>
+
+    </thead>
+    <tbody>
+      <tr *ngFor="let detalle of detalles">
+        <td>{{ detalle.cur_codigo }}_{{detalle.sec_codigo}}</td>
+        <td>{{ detalle.reg_curso }}</td>
+        <td>{{ get_inicio(detalle.reg_curso) }}</td>
+
+      </tr>
+    </tbody>
+  </table>
+
+
+</div>
