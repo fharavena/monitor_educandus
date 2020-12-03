@@ -13,6 +13,7 @@ import { FooterComponent } from './components/common/footer/footer.component';
 import { ErrorComponent } from './components/common/error/error.component';
 import { NeveraccessComponent } from './components/estadistica/neveraccess/neveraccess.component';
 import { NeveraccessdetailComponent } from './components/estadistica/neveraccessdetail/neveraccessdetail.component';
+import { Last30Component } from './components/estadistica/last30/last30.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { NeveraccessdetailComponent } from './components/estadistica/neveraccess
     ErrorComponent,
     NeveraccessComponent,
     NeveraccessdetailComponent,
+    Last30Component,
   ],
   imports: [
     BrowserModule,

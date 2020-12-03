@@ -9,13 +9,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   constructor(private _router: Router, private _route: ActivatedRoute) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  logout_btn() {
+    localStorage.removeItem('token_moodle');
+    this._router.navigate(['login']);
   }
-
-  logout_btn(){
-
-    localStorage.removeItem('token');
-        this._router.navigate(['login']);
-  }
-
 }

@@ -5,11 +5,11 @@ import { Escuela } from 'src/app/models/escuela';
 import { NeveraccessService } from 'src/app/services/neveraccess.service';
 
 @Component({
-  selector: 'app-neveraccess',
-  templateUrl: './neveraccess.component.html',
-  styleUrls: ['./neveraccess.component.css'],
+  selector: 'app-last30',
+  templateUrl: './last30.component.html',
+  styleUrls: ['./last30.component.css'],
 })
-export class NeveraccessComponent implements OnInit {
+export class Last30Component implements OnInit {
   public usuarios: Array<Usuario> = [];
   public facultades: Array<Facultad> = [];
   public escuelas: Escuela[] | undefined;
@@ -19,10 +19,11 @@ export class NeveraccessComponent implements OnInit {
 
   ngOnInit(): void {
     this.get_usuarios();
+
   }
 
   get_usuarios() {
-    this._neveraccessService.get_usuarios().subscribe((response) => {
+    this._neveraccessService.get_usuarios_30().subscribe((response) => {
       this.usuarios = response.data;
 
       response.data.forEach((element: any) => {
@@ -42,7 +43,7 @@ export class NeveraccessComponent implements OnInit {
                     username: element.username,
                     firstname: element.firstname,
                     lastname: element.lastname,
-                    lastaccess: null,
+                    lastaccess: element.lastaccess,
                     cod_pra: element.cod_pra,
                     nom_pra: element.nom_pra,
                   },
@@ -72,7 +73,7 @@ export class NeveraccessComponent implements OnInit {
                 username: element.username,
                 firstname: element.firstname,
                 lastname: element.lastname,
-                lastaccess: null,
+                lastaccess: element.lastaccess,
                 cod_pra: element.cod_pra,
                 nom_pra: element.nom_pra,
               });
@@ -88,7 +89,7 @@ export class NeveraccessComponent implements OnInit {
                     username: element.username,
                     firstname: element.firstname,
                     lastname: element.lastname,
-                    lastaccess: null,
+                    lastaccess: element.lastaccess,
                     cod_pra: element.cod_pra,
                     nom_pra: element.nom_pra,
                   },
@@ -112,7 +113,7 @@ export class NeveraccessComponent implements OnInit {
                       username: element.username,
                       firstname: element.firstname,
                       lastname: element.lastname,
-                      lastaccess: null,
+                      lastaccess: element.lastaccess,
                       cod_pra: element.cod_pra,
                       nom_pra: element.nom_pra,
                     },

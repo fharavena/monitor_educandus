@@ -7,17 +7,14 @@ import {
   Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { NeveraccessService } from 'src/app/services/neveraccess.service';
-import { map, take } from 'rxjs/operators';
+import { LoginService } from 'src/app/services/login.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(
-    private _router: Router,
-    private _neveraccess: NeveraccessService
-  ) {}
+  moodle_token: string = localStorage.getItem('token_moodle');
+  constructor(private _router: Router, private _login: LoginService) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -27,21 +24,12 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (!localStorage.getItem('token')) {
+
+    if (this.moodle_token == null) {
       this._router.navigate(['login']);
       return false;
+    } else {
+      return true;
     }
-
-    return this._neveraccess.validartoken().pipe(
-      take(1),
-      map((isAuthenticated) => {
-        if (isAuthenticated['status'] == 'success') {
-          return true;
-        } else {
-          this._router.navigate(['login']);
-          return false;
-        }
-      })
-    );
   }
 }

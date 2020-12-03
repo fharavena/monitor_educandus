@@ -1,0 +1,77 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb" style="background-color: white">
+    <li class="breadcrumb-item"><a routerLink="">Inicio</a></li>
+    <li class="breadcrumb-item active" aria-current="page">
+      Usuarios sin ingreso hace 30 días
+    </li>
+  </ol>
+</nav>
+
+<div class="col-12">
+  <h2>Usuarios que no han accedido hace 30 días</h2>
+</div>
+
+<div *ngIf="!show" class="col-12 loading">
+  <div class="loader" style="margin: auto; margin-top: 15%"></div>
+</div>
+
+<div class="col-12" *ngIf="show">
+  <div class="col-12" *ngFor="let facultad of facultades">
+    <a
+      class="btn btn-primary my-2 btn-block text-left"
+      data-toggle="collapse"
+      href="#facultad_{{ facultad.fac_codigo }}"
+      role="button"
+    >
+      <span>{{ facultad.fac_nombre }}</span>
+      <span class="" style="float: right">+</span>
+      <span class="mr-3 numberCircle">{{ facultad.contador }}</span>
+    </a>
+    <div class="collapse" id="facultad_{{ facultad.fac_codigo }}">
+      <div class="card card-body">
+        <div class="col-12" *ngFor="let escuela of facultad.escuela">
+          <a
+            class="btn btn-primary my-2 btn-block text-left"
+            data-toggle="collapse"
+            href="#escuela_{{ escuela.esc_codigo }}_{{ escuela.fac_codigo }}"
+            role="button"
+          >
+            <span>{{ escuela.esc_nombre }}</span>
+            <span class="" style="float: right">+</span>
+            <span class="mr-3 numberCircle">{{ escuela.contador }}</span>
+          </a>
+          <div
+            class="collapse"
+            id="escuela_{{ escuela.esc_codigo }}_{{ escuela.fac_codigo }}"
+          >
+            <div class="card card-body">
+              <!------------------------------------------------------------------------------------------------------------------>
+              <table class="table">
+                <thead>
+                  <th>#</th>
+                  <th>nombre</th>
+                  <th>apellido</th>
+                  <th>rut</th>
+                  <th>carrera</th>
+                  <th>Último accesso</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let usuario of escuela.usuario; index as i">
+                    <td>{{ i + 1 }}</td>
+                    <td>
+                      {{ usuario.username }}
+                    </td>
+                    <td>{{ usuario.firstname }}</td>
+                    <td>{{ usuario.lastname }}</td>
+                    <td>{{ usuario.nom_pra }}</td>
+                    <td>{{ usuario.lastaccess }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

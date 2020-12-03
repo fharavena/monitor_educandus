@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { NeveraccessService } from 'src/app/services/neveraccess.service';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -8,36 +8,26 @@ import { NeveraccessService } from 'src/app/services/neveraccess.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  public page_title: string;
-  public status: string;
-  public token;
-  public identity;
+  public status: string = '';
+
   public user;
   public pass;
   public mensaje;
 
-  constructor(
-    private _router: Router,
-    private _route: ActivatedRoute,
-    private _neveraccess: NeveraccessService
-  ) {}
+  constructor(private _router: Router, private _login: LoginService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSubmit(form) {
-    this._neveraccess
-      .getToken(form['usuario'], form['password'])
+    this._login
+      .moodle_getToken(form['usuario'], form['password'])
       .subscribe((response) => {
-        if (response['status'] == 'error') {
-          this.mensaje = response['data'];
-        } else if (response['status'] == 'success') {
-          localStorage.setItem('token', response['data']);
-          this._router.navigate(['/']);
+        if (response['errorcode'] != 'invalidlogin') {
+          localStorage.setItem('token_moodle', response['token']);
+          this._router.navigate(['/inicio']);
         } else {
-          console.log(response);
+          this.mensaje = response['error'];
         }
       });
   }
-
 }
