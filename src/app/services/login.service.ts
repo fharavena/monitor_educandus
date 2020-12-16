@@ -7,20 +7,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class LoginService {
-  private url: string;
-  public identity: string = '';
-  public token: string = '';
 
-  constructor(public _http: HttpClient) {
-    this.url = global.url_stats;
-  }
+  constructor(public _http: HttpClient) {}
 
   public moodle_getToken(user, password) {
     let params = new HttpParams();
     params = params.append('username', user);
     params = params.append('password', password);
     params = params.append('service', 'moodle_mobile_app');
-    return this._http.get(global.url_moodle + 'token.php/', { params: params });
+    return this._http.get(global.url_moodle + 'login/token.php/', { params: params });
   }
 
   public moodle_validartoken(): Observable<any> {
@@ -34,5 +29,4 @@ export class LoginService {
       params: params,
     });
   }
-
 }

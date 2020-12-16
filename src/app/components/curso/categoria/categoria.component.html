@@ -1,0 +1,38 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb" style="background-color: white">
+    <li class="breadcrumb-item"><a routerLink="">Inicio</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Categorias</li>
+  </ol>
+</nav>
+
+<div class="col-12">
+  <h2>Información de cursos</h2>
+</div>
+
+<div *ngIf="!show" class="col-12 loading">
+  <div class="loader" style="margin: auto; margin-top: 15%"></div>
+</div>
+
+<div class="col-12" *ngIf="show">
+  <div class="col-12" *ngFor="let categoria of categorias">
+    <a
+      class="btn btn-primary my-2 btn-block text-left"
+      data-toggle="collapse"
+      href="#categoria_{{ categoria.id }}"
+      (click)="obtener_curso(categoria.id)"
+      role="button"
+    >
+      <span>{{ categoria.name }}</span>
+      <span class="" style="float: right">+</span>
+      <span class="mr-3 numberCircle">{{ categoria.coursecount }}</span>
+    </a>
+    <div
+            class="collapse"
+            id="categoria_{{ categoria.id }}"
+          >
+          <div class="card card-body">
+            hola mundo
+          </div>
+        </div>
+  </div>
+</div>

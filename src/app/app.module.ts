@@ -14,6 +14,9 @@ import { ErrorComponent } from './components/common/error/error.component';
 import { NeveraccessComponent } from './components/estadistica/neveraccess/neveraccess.component';
 import { NeveraccessdetailComponent } from './components/estadistica/neveraccessdetail/neveraccessdetail.component';
 import { Last30Component } from './components/estadistica/last30/last30.component';
+import { CategoriaComponent } from './components/curso/categoria/categoria.component';
+import { CursoListaComponent } from './components/curso/curso-lista/curso-lista.component';
+import { CursoDetalleComponent } from './components/curso/curso-detalle/curso-detalle.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,9 @@ import { Last30Component } from './components/estadistica/last30/last30.componen
     NeveraccessComponent,
     NeveraccessdetailComponent,
     Last30Component,
+    CategoriaComponent,
+    CursoListaComponent,
+    CursoDetalleComponent,
   ],
   imports: [
     BrowserModule,
